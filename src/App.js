@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Login from './components/Login/Login';
 import Home from './components/Home/Home';
@@ -9,12 +9,21 @@ function App() {
 
   const loginHandler = (email, password) => {
     // We should of course check email and password
-    setIsLoggedIn(true);
+    localStorage.setItem('isLoggedIn',JSON.stringify({email,password}));
+    setIsLoggedIn(true);    
   };
 
   const logoutHandler = () => {
+    localStorage.removeItem('isLoggedIn');
     setIsLoggedIn(false);
   };
+
+  useEffect(()=>{
+    const loginStatus = JSON.parse(localStorage.getItem('isLoggedIn'));
+    if(loginStatus && loginStatus.email && loginStatus.password) {
+      setIsLoggedIn(true);
+    }
+  },[isLoggedIn])
 
   return (
     <React.Fragment>

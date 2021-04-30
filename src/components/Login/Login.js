@@ -8,40 +8,39 @@ const initialState = {
   email: '',
   password: '',
   isEmailValid: null,
-  isPasswordValid: null
+  isPasswordValid: null,
+};
 
-}
-
-const reducer = (state,action) => {
-  switch(action.type) {
+const reducer = (state, action) => {
+  switch (action.type) {
     case 'CHANGE_EMAIL':
       return {
         ...state,
         email: action.email,
-        isEmailValid: action.email.includes('@')
-      }
+        isEmailValid: action.email.includes('@'),
+      };
     case 'CHANGE_PASSWORD':
       return {
         ...state,
         password: action.password,
-        isPasswordValid: action.password.trim().length > 6
-      }
+        isPasswordValid: action.password.trim().length > 6,
+      };
     case 'INPUT_BLUR':
       return {
         ...state,
         email: state.email,
         isEmailValid: state.email.includes('@'),
-      }
+      };
     case 'PASSWORD_BLUR':
       return {
         ...state,
         password: state.password,
-        isPasswordValid: state.password.trim().length > 6
-      }
+        isPasswordValid: state.password.trim().length > 6,
+      };
     default:
       return state;
   }
-}
+};
 
 const Login = (props) => {
   // const [enteredEmail, setEnteredEmail] = useState('');
@@ -53,31 +52,31 @@ const Login = (props) => {
   const [emailState, dispatch] = useReducer(reducer, initialState);
   const { isEmailValid, isPasswordValid } = emailState;
 
-  useEffect(()=>{
-    const timer = setTimeout(()=>{
+  useEffect(() => {
+    const timer = setTimeout(() => {
       setFormIsValid(isEmailValid && isPasswordValid);
-    },500)
+    }, 500);
     return () => clearTimeout(timer);
-  },[isEmailValid, isPasswordValid])
+  }, [isEmailValid, isPasswordValid]);
 
   const emailChangeHandler = (event) => {
-    dispatch({type: 'CHANGE_EMAIL', email: event.target.value});
+    dispatch({ type: 'CHANGE_EMAIL', email: event.target.value });
     //setFormIsValid(event.target.value.includes('@') && emailState.isPasswordValid);
   };
 
   const passwordChangeHandler = (event) => {
-    dispatch({type: 'CHANGE_PASSWORD', password: event.target.value});
+    dispatch({ type: 'CHANGE_PASSWORD', password: event.target.value });
     // setEnteredPassword(event.target.value);
     //setFormIsValid(emailState.isEmailValid && event.target.value.trim().length > 6);
   };
 
   const validateEmailHandler = () => {
-    dispatch({type: 'INPUT_BLUR'})
+    dispatch({ type: 'INPUT_BLUR' });
     //setEmailIsValid(emailState.isValid);
   };
 
   const validatePasswordHandler = () => {
-    dispatch({type: 'PASSWORD_BLUR'});
+    dispatch({ type: 'PASSWORD_BLUR' });
   };
 
   const submitHandler = (event) => {

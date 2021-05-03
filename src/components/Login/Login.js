@@ -5,6 +5,7 @@ import AuthContext from '../../store/auth-context';
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
+import Input from '../UI/Input/Input';
 
 const initialState = {
   email: '',
@@ -90,7 +91,13 @@ const Login = (props) => {
   return (
     <Card className={classes.login}>
       <form onSubmit={submitHandler}>
-        
+        <Input id='email' 
+        label='Email' 
+        type='email' 
+        isValid={isEmailValid} 
+        onBlur={validateEmailHandler} 
+        onChange={emailChangeHandler} 
+        value={emailState.email}/> 
         <div
           className={`${classes.control} ${
             emailState.isPasswordValid === false ? classes.invalid : ''

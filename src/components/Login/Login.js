@@ -97,21 +97,14 @@ const Login = (props) => {
         isValid={isEmailValid} 
         onBlur={validateEmailHandler} 
         onChange={emailChangeHandler} 
-        value={emailState.email}/> 
-        <div
-          className={`${classes.control} ${
-            emailState.isPasswordValid === false ? classes.invalid : ''
-          }`}
-        >
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={emailState.password}
-            onChange={passwordChangeHandler}
-            onBlur={validatePasswordHandler}
-          />
-        </div>
+        value={emailState.email}/>
+        <Input id='password' 
+        label='Password' 
+        type='password' 
+        isValid={isPasswordValid} 
+        onBlur={validatePasswordHandler} 
+        onChange={passwordChangeHandler} 
+        value={emailState.password}/> 
         <div className={classes.actions}>
           <Button type="submit" className={classes.btn} disabled={!formIsValid}>
             Login
